@@ -132,6 +132,7 @@ clawhub install skill-name
 | **markdown-converter** | PDF/文档转 Markdown | `clawhub install markdown-converter` | [openclaw/markdown-converter](https://github.com/openclaw/markdown-converter) |
 | **tavily-search** | 深度网络搜索（学术论文、技术内容） | `clawhub install tavily-search` | [openclaw/tavily-search](https://github.com/openclaw/tavily-search) |
 | **munger-observer** | 芒格观察（每日思维模型复盘） | `clawhub install munger-observer` | [openclaw/munger-observer](https://github.com/openclaw/munger-observer) |
+| **github** | GitHub 操作（`gh` CLI，支持 issue/pr/run/api） | `clawhub install steipete/github` | [steipete/clawdhub](https://github.com/openclaw/skills/tree/main/skills/steipete/clawdhub) |
 | **notion-lifeos** ⭐ | Memory System for Human — Notion LifeOS PARA 系统管理 | `clawhub install notion-lifeos` | [jiahao-shao1/openclaw-skill-notion-lifeos](https://github.com/jiahao-shao1/openclaw-skill-notion-lifeos) |
 
 ### 手动安装命令示例
