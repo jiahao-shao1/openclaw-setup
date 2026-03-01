@@ -1,0 +1,32 @@
+# .gitignore for OpenClaw Setup
+
+# 私密信息（绝不上传）
+USER.md
+TOOLS.md
+MEMORY.md
+
+# 每日日志（可能含敏感内容）
+memory/20*.md
+memory/personal/
+memory/projects/
+
+# API Keys
+*.key
+.env
+.env.local
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 临时文件
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# 编辑器
+.vscode/
+.idea/
+*.iml

@@ -1,0 +1,68 @@
+# TOOLS.md - 工具配置
+
+**⚠️ 本文件包含 API Keys 等敏感信息，请勿上传 GitHub**
+
+复制此文件到 `~/.openclaw/workspace/TOOLS.md` 并填写你的配置。
+
+---
+
+## API Keys
+
+### Gemini
+```bash
+export GEMINI_API_KEY="your-gemini-api-key"
+```
+
+### OpenAI
+```bash
+export OPENAI_API_KEY="your-openai-api-key"
+```
+
+### 其他服务
+```bash
+# 根据需要添加
+export ANTHROPIC_API_KEY="your-anthropic-key"
+export BRAVE_API_KEY="your-brave-key"
+```
+
+## 代理设置
+
+如果你在中国大陆：
+
+```bash
+# 添加到 ~/.zshrc
+export ALL_PROXY=http://127.0.0.1:7890
+export https_proxy=http://127.0.0.1:7890
+export http_proxy=http://127.0.0.1:7890
+```
+
+## 设备信息
+
+### SSH 主机
+- **home-server** → 192.168.1.100, user: admin
+
+### 摄像头
+- **living-room** → 客厅，180° 广角
+- **front-door** → 前门，运动检测
+
+### TTS 语音
+- 偏好声音："Nova"（温暖，略带英式口音）
+- 默认音箱：客厅 HomePod
+
+## 工具特定配置
+
+### summarize
+```json
+{
+  "model": { "id": "google/gemini-3-flash-preview" },
+  "env": {
+    "GEMINI_API_KEY": "your-key",
+    "HTTP_PROXY": "http://127.0.0.1:7890",
+    "HTTPS_PROXY": "http://127.0.0.1:7890"
+  }
+}
+```
+
+---
+
+*根据你的实际情况填写后，保存到 `~/.openclaw/workspace/TOOLS.md`*
