@@ -90,6 +90,83 @@ openclaw onboard --install-daemon
 - 配置 API Key
 - 选择消息渠道（Telegram、飞书等）
 
+### 配置 Telegram
+
+#### 1. 创建 Telegram Bot
+
+1. 在 Telegram 中找到 [@BotFather](https://t.me/BotFather)
+2. 发送 `/newbot` 创建新 bot
+3. 按提示设置 bot 名称和 username
+4. 获取 Bot Token（格式：`123456789:ABCdefGHIjklMNOpqrsTUVwxyz`）
+
+#### 2. 配置 OpenClaw
+
+编辑 `~/.openclaw/openclaw.json`：
+
+```json
+{
+  "channels": {
+    "telegram": {
+      "token": "YOUR_BOT_TOKEN",
+      "allowFrom": ["+86138xxxxxxxx"],  // 你的手机号（可选）
+      "groups": {
+        "*": {
+          "requireMention": true  // 群组中需要 @bot 才会响应
+        }
+      }
+    }
+  }
+}
+```
+
+#### 3. 获取群组 ID
+
+创建群组后，需要获取群组 ID 用于 cron 任务推送：
+
+```bash
+# 方法 1：通过 OpenClaw CLI
+openclaw channels telegram groups
+
+# 方法 2：在群组中发送任意消息给 bot，查看日志
+# 群组 ID 格式：-1001234567890（负数）
+```
+
+#### 4. 群组权限配置
+
+**推荐配置**：为不同类型的消息创建不同群组
+
+```json
+{
+  "channels": {
+    "telegram": {
+      "groups": {
+        "*": {
+          "requireMention": true,  // 默认需要 @mention
+          "allowFrom": ["+86138xxxxxxxx"]  // 只允许特定用户
+        },
+        "-1001234567890": {  // 特定群组 ID
+          "requireMention": false,  // 该群组不需要 @mention
+          "allowFrom": ["*"]  // 允许所有人
+        }
+      }
+    }
+  }
+}
+```
+
+**群组分工示例**（参考我的配置）：
+
+- **agent config** — Agent 配置相关（nightly-build、系统维护）
+- **reading group** — 科研、论文、行业动态
+- **self-improvement** — 自我提升、芒格观察
+
+#### 5. 安全建议
+
+- ✅ 设置 `allowFrom` 限制允许的用户
+- ✅ 群组中启用 `requireMention: true`
+- ✅ 定期检查 bot 的群组列表
+- ✅ 不要在公开群组中使用敏感功能
+
 ### 验证安装
 
 ```bash
