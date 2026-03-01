@@ -91,25 +91,25 @@ clawhub update skill-name
 
 ### 方式二：手动安装（git clone）
 
-如果 ClawHub 安装失败，可以通过 git clone 手动安装到 `~/.openclaw/workspace/skills/` 目录：
+如果 ClawHub 安装失败，可以通过 git clone 手动安装到 `~/.openclaw/skills/` 目录（Shared Skills，可被多个 OpenClaw 实例共享）：
 
 ### 核心 Skills
 
 ```bash
-# 创建 skills 目录
-mkdir -p ~/.openclaw/workspace/skills
+# 创建 shared skills 目录（推荐，可被多个实例共享）
+mkdir -p ~/.openclaw/skills
 
 # Agent Reach - 让 AI 能够访问互联网（Twitter/X、Reddit、YouTube、GitHub、Bilibili、小红书、抖音等）
 git clone https://github.com/Panniantong/agent-reach.git \
-  ~/.openclaw/workspace/skills/agent-reach
+  ~/.openclaw/skills/agent-reach
 
 # 持续改进系统
 git clone https://github.com/pskoett/self-improving-agent.git \
-  ~/.openclaw/workspace/skills/self-improving-agent
+  ~/.openclaw/skills/self-improving-agent
 
 # 主动式 Agent 架构
 git clone https://github.com/halthelobster/proactive-agent.git \
-  ~/.openclaw/workspace/skills/proactive-agent
+  ~/.openclaw/skills/proactive-agent
 ```
 
 ### 其他推荐 Skills
@@ -117,32 +117,32 @@ git clone https://github.com/halthelobster/proactive-agent.git \
 ```bash
 # AI 图片生成（基于 Gemini）
 git clone https://github.com/openclaw/nano-banana-pro.git \
-  ~/.openclaw/workspace/skills/nano-banana-pro
+  ~/.openclaw/skills/nano-banana-pro
 
 # PDF/文档转 Markdown
 git clone https://github.com/openclaw/markdown-converter.git \
-  ~/.openclaw/workspace/skills/markdown-converter
+  ~/.openclaw/skills/markdown-converter
 
 # 手绘风格流程图
 git clone https://github.com/openclaw/excalidraw.git \
-  ~/.openclaw/workspace/skills/excalidraw
+  ~/.openclaw/skills/excalidraw
 
 # 去除 AI 文本痕迹
 git clone https://github.com/openclaw/de-ai-ify.git \
-  ~/.openclaw/workspace/skills/de-ai-ify
+  ~/.openclaw/skills/de-ai-ify
 
 # 中文人性化处理
 git clone https://github.com/openclaw/humanizer-zh.git \
-  ~/.openclaw/workspace/skills/humanizer-zh
+  ~/.openclaw/skills/humanizer-zh
 
 # 快速提醒
 git clone https://github.com/openclaw/quick-reminders.git \
-  ~/.openclaw/workspace/skills/quick-reminders
+  ~/.openclaw/skills/quick-reminders
 
 # GitHub 操作（gh CLI）
 git clone https://github.com/openclaw/skills.git \
-  ~/.openclaw/workspace/skills/steipete-github
-cd ~/.openclaw/workspace/skills/steipete-github
+  ~/.openclaw/skills/steipete-github
+cd ~/.openclaw/skills/steipete-github
 git sparse-checkout init
 git sparse-checkout set skills/steipete/clawdhub
 ```

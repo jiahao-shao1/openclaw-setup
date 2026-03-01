@@ -19,7 +19,8 @@ cd openclaw-setup
 
 ```bash
 # 创建 OpenClaw workspace（如果不存在）
-mkdir -p ~/.openclaw/workspace/skills
+mkdir -p ~/.openclaw/workspace
+mkdir -p ~/.openclaw/skills
 
 # 复制公开配置
 cp AGENTS.md SOUL.md HEARTBEAT.md ~/.openclaw/workspace/
@@ -109,7 +110,7 @@ clawhub install skill-name
 
 ### 方式二：手动安装（git clone）
 
-如果 ClawHub 安装失败，可以通过 git clone 手动安装：
+如果 ClawHub 安装失败，可以通过 git clone 手动安装到 `~/.openclaw/skills/` 目录（Shared Skills，可被多个 OpenClaw 实例共享）：
 
 | Skill | 功能 | ClawHub 命令 | 手动安装链接 |
 |-------|------|-------------|-------------|
@@ -127,17 +128,17 @@ clawhub install skill-name
 ### 手动安装命令示例
 
 ```bash
-# 创建 skills 目录
-mkdir -p ~/.openclaw/workspace/skills
+# 创建 shared skills 目录（推荐，可被多个实例共享）
+mkdir -p ~/.openclaw/skills
 
 # 安装核心 Skills（推荐全部安装）
-git clone https://github.com/Panniantong/agent-reach.git ~/.openclaw/workspace/skills/agent-reach
-git clone https://github.com/pskoett/self-improving-agent.git ~/.openclaw/workspace/skills/self-improving-agent
-git clone https://github.com/halthelobster/proactive-agent.git ~/.openclaw/workspace/skills/proactive-agent
+git clone https://github.com/Panniantong/agent-reach.git ~/.openclaw/skills/agent-reach
+git clone https://github.com/pskoett/self-improving-agent.git ~/.openclaw/skills/self-improving-agent
+git clone https://github.com/halthelobster/proactive-agent.git ~/.openclaw/skills/proactive-agent
 
 # 安装其他 Skills（按需选择）
-git clone https://github.com/openclaw/nano-banana-pro.git ~/.openclaw/workspace/skills/nano-banana-pro
-git clone https://github.com/openclaw/markdown-converter.git ~/.openclaw/workspace/skills/markdown-converter
+git clone https://github.com/openclaw/nano-banana-pro.git ~/.openclaw/skills/nano-banana-pro
+git clone https://github.com/openclaw/markdown-converter.git ~/.openclaw/skills/markdown-converter
 ```
 
 ## 配置 Agent Reach ⭐
@@ -191,24 +192,29 @@ git clone https://github.com/openclaw/markdown-converter.git ~/.openclaw/workspa
 ## Workspace 结构
 
 ```
-~/.openclaw/workspace/
-├── AGENTS.md              # ← 本仓库提供
-├── SOUL.md                # ← 本仓库提供
-├── HEARTBEAT.md           # ← 本仓库提供
-├── USER.md                # ← 你自己创建（私密）
-├── TOOLS.md               # ← 你自己创建（私密）
-├── MEMORY.md              # ← 自动维护
-├── memory/
-│   ├── YYYY-MM-DD.md      # 每日日志
-│   ├── topics/            # 主题知识库
-│   ├── projects/          # 研究项目
-│   └── reading-group/     # 阅读小组共享
-└── skills/                # 本地 Skills
-    ├── agent-reach/       # 互联网访问（关键）⭐
+~/.openclaw/
+├── workspace/
+│   ├── AGENTS.md              # ← 本仓库提供
+│   ├── SOUL.md                # ← 本仓库提供
+│   ├── HEARTBEAT.md           # ← 本仓库提供
+│   ├── USER.md                # ← 你自己创建（私密）
+│   ├── TOOLS.md               # ← 你自己创建（私密）
+│   ├── MEMORY.md              # ← 自动维护
+│   └── memory/
+│       ├── YYYY-MM-DD.md      # 每日日志
+│       ├── topics/            # 主题知识库
+│       ├── projects/          # 研究项目
+│       └── reading-group/     # 阅读小组共享
+└── skills/                    # ← Shared Skills（推荐）
+    ├── agent-reach/           # 互联网访问（关键）⭐
     ├── self-improving-agent/
     ├── proactive-agent/
     └── ...
 ```
+
+> **提示**：Skills 可以安装在两个位置：
+> - `~/.openclaw/skills/` - **Shared Skills**（推荐），可被多个 OpenClaw 实例共享
+> - `~/.openclaw/workspace/skills/` - **Workspace Skills**，仅当前实例可用，适合存放个人化配置
 
 ## ⚠️ 重要提示
 
