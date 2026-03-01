@@ -87,7 +87,7 @@ cp AGENTS.md SOUL.md HEARTBEAT.md ~/.openclaw/workspace/
 
 创建群组后，需要获取群组 ID 用于 cron 任务推送：
 
-**方法 1：通过 OpenClaw 日志查看（推荐）**
+**方法 1：通过 OpenClaw 日志查看（最简单）**
 ```bash
 # 在群组中 @bot 发送任意消息
 # OpenClaw 会在日志中显示 chat_id
@@ -96,8 +96,21 @@ cp AGENTS.md SOUL.md HEARTBEAT.md ~/.openclaw/workspace/
 
 **方法 2：使用 Telegram Bot API**
 ```bash
+# 1. 先在群组中发送一条消息（任意内容）
+# 2. 然后调用 API
 curl "https://api.telegram.org/bot<YOUR_BOT_TOKEN>/getUpdates"
-# 返回的 JSON 中会包含所有最近消息的 chat.id
+
+# 3. 在返回的 JSON 中找到 result[0].message.chat.id
+# 群组 ID 是负数，格式：-1001234567890
+```
+
+**方法 3：通过 Telegram 桌面版（最快）**
+```bash
+# 1. 在群组中发送一条消息
+# 2. 右键点击消息 → "Copy Message Link"
+# 3. 链接格式：https://t.me/c/194xxxx987/11/13
+# 4. 提取中间的数字（194xxxx987），加上 -100 前缀
+# 5. 最终群组 ID：-100194xxxx987
 ```
 
 #### 4. 群组权限配置
