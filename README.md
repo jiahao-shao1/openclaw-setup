@@ -87,12 +87,22 @@ cp AGENTS.md SOUL.md HEARTBEAT.md ~/.openclaw/workspace/
 
 创建群组后，需要获取群组 ID 用于 cron 任务推送：
 
+**方法 1：通过 OpenClaw 日志查看**
 ```bash
-# 方法 1：通过 OpenClaw CLI
-openclaw channels telegram groups
+# 在群组中 @bot 发送任意消息，然后查看日志
+# OpenClaw 会在日志中显示 chat_id
+# 群组 ID 格式：telegram:-1001234567890（负数）
+```
 
-# 方法 2：在群组中发送任意消息给 bot，查看日志
-# 群组 ID 格式：-1001234567890（负数）
+**方法 2：使用 Telegram Bot API**
+```bash
+curl "https://api.telegram.org/bot<YOUR_BOT_TOKEN>/getUpdates"
+```
+
+**方法 3：查看 OpenClaw 配置文件**
+```bash
+openclaw gateway config.get
+# 已配置的群组会列在 channels.telegram.groups 中
 ```
 
 #### 4. 群组权限配置
