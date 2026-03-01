@@ -179,7 +179,11 @@ git clone https://github.com/openclaw/markdown-converter.git ~/.openclaw/skills/
 
 ## 配置 Notion LifeOS ⭐
 
-**Notion LifeOS** 是基于 PARA 方法的个人知识管理系统，通过 OpenClaw 可以用自然语言管理你的 Notion 数据库。
+**Notion LifeOS** — **Memory System for Human**
+
+基于 PARA 方法的个人知识管理系统，通过 OpenClaw 可以用自然语言管理你的 Notion 数据库。
+
+就像 OpenClaw 为 AI 提供了持久化记忆，Notion LifeOS 为人类提供了外部记忆系统——让你的大脑专注于思考，而不是记忆。
 
 ### 功能特性
 
