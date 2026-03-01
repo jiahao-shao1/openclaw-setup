@@ -19,60 +19,7 @@ OpenClaw 不只是一个 AI 助手，而是一个**自动化操作系统**：
 
 ## 快速开始
 
-### 1. Fork 本仓库
-
-```bash
-git clone https://github.com/YOUR_USERNAME/openclaw-setup.git
-cd openclaw-setup
-```
-
-### 2. 复制配置文件
-
-```bash
-# 创建 OpenClaw workspace（如果不存在）
-mkdir -p ~/.openclaw/workspace
-mkdir -p ~/.openclaw/skills
-
-# 复制公开配置
-cp AGENTS.md SOUL.md HEARTBEAT.md ~/.openclaw/workspace/
-
-# 创建私密文件（从示例复制）
-cp examples/USER.md.example ~/.openclaw/workspace/USER.md
-cp examples/TOOLS.md.example ~/.openclaw/workspace/TOOLS.md
-```
-
-### 3. 填写个人信息
-
-编辑以下文件，填入你的信息：
-
-**`~/.openclaw/workspace/USER.md`** - 你的个人信息：
-- 姓名、邮箱
-- Telegram 群组 ID
-- 个人目标与兴趣
-
-**`~/.openclaw/workspace/TOOLS.md`** - 工具配置：
-- API Keys（Gemini、OpenAI 等）
-- 代理设置
-- 设备信息
-
-## 文件说明
-
-| 文件 | 用途 | 隐私级别 |
-|------|------|---------|
-| `AGENTS.md` | Agent 工作流与协作规则 | 🟢 公开 |
-| `SOUL.md` | Agent 身份、个性与行为准则 | 🟢 公开 |
-| `HEARTBEAT.md` | 定时任务清单 | 🟢 公开 |
-| `USER.md` | 用户个人信息 | 🔴 私密 |
-| `TOOLS.md` | API Keys 与工具配置 | 🔴 私密 |
-
-## 本地部署
-
-### 环境要求
-- macOS / Linux / Windows (WSL2)
-- Node.js >= 22.0.0
-- 2GB+ 内存
-
-### 安装步骤
+### 1. 安装 OpenClaw
 
 ```bash
 # 方式一：一键脚本（推荐）
@@ -80,17 +27,34 @@ curl -fsSL https://openclaw.ai/install.sh | bash
 
 # 方式二：npm 全局安装
 npm install -g openclaw@latest
+```
 
-# 运行配置向导
+### 2. 运行配置向导
+
+```bash
 openclaw onboard --install-daemon
 ```
 
-配置向导会引导你完成：
-- 选择 AI 模型提供商（Claude、OpenAI、Gemini 等）
+配置向导会自动：
+- 创建 workspace 目录和配置文件
+- 引导你选择 AI 模型提供商（Claude、OpenAI、Gemini 等）
 - 配置 API Key
 - 选择消息渠道（Telegram、飞书等）
+- 生成 AGENTS.md、SOUL.md、USER.md 等文件
 
-### 配置 Telegram
+### 3. Fork 本仓库（可选）
+
+如果你想使用我的配置作为模板：
+
+```bash
+git clone https://github.com/YOUR_USERNAME/openclaw-setup.git
+cd openclaw-setup
+
+# 复制你需要的配置文件到 workspace
+cp AGENTS.md SOUL.md HEARTBEAT.md ~/.openclaw/workspace/
+```
+
+### 4. 配置 Telegram
 
 #### 1. 创建 Telegram Bot
 
