@@ -138,6 +138,13 @@ git clone https://github.com/openclaw/humanizer-zh.git \
 # 快速提醒
 git clone https://github.com/openclaw/quick-reminders.git \
   ~/.openclaw/workspace/skills/quick-reminders
+
+# GitHub 操作（gh CLI）
+git clone https://github.com/openclaw/skills.git \
+  ~/.openclaw/workspace/skills/steipete-github
+cd ~/.openclaw/workspace/skills/steipete-github
+git sparse-checkout init
+git sparse-checkout set skills/steipete/clawdhub
 ```
 
 ---

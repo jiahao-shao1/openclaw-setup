@@ -122,6 +122,7 @@ clawhub install skill-name
 | **de-ai-ify** | 去除 AI 文本痕迹 | `clawhub install de-ai-ify` | [openclaw/de-ai-ify](https://github.com/openclaw/de-ai-ify) |
 | **humanizer-zh** | 中文人性化处理 | `clawhub install humanizer-zh` | [openclaw/humanizer-zh](https://github.com/openclaw/humanizer-zh) |
 | **quick-reminders** | 快速提醒 | `clawhub install quick-reminders` | [openclaw/quick-reminders](https://github.com/openclaw/quick-reminders) |
+| **github** | GitHub 操作（`gh` CLI，支持 issue/pr/run/api） | `clawhub install steipete/github` | [steipete/clawdhub](https://github.com/openclaw/skills/tree/main/skills/steipete/clawdhub) |
 
 ### 手动安装命令示例
 
