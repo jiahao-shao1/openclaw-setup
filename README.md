@@ -135,7 +135,7 @@ clawhub install skill-name
 | **humanizer-zh** | 中文人性化处理 | `clawhub install humanizer-zh` | [openclaw/humanizer-zh](https://github.com/openclaw/humanizer-zh) |
 | **quick-reminders** | 快速提醒 | `clawhub install quick-reminders` | [openclaw/quick-reminders](https://github.com/openclaw/quick-reminders) |
 | **github** | GitHub 操作（`gh` CLI，支持 issue/pr/run/api） | `clawhub install steipete/github` | [steipete/clawdhub](https://github.com/openclaw/skills/tree/main/skills/steipete/clawdhub) |
-| **notion-lifeos** ⭐ | Notion LifeOS PARA 系统管理（任务/笔记/项目/资源/领域/Make Time） | `clawhub install notion-lifeos` | [jiahao-shao1/openclaw-skill-notion-lifeos](https://github.com/jiahao-shao1/openclaw-skill-notion-lifeos) |
+| **notion-lifeos** ⭐ | Memory System for Human — Notion LifeOS PARA 系统管理 | `clawhub install notion-lifeos` | [jiahao-shao1/openclaw-skill-notion-lifeos](https://github.com/jiahao-shao1/openclaw-skill-notion-lifeos) |
 
 ### 手动安装命令示例
 
@@ -176,64 +176,6 @@ git clone https://github.com/openclaw/markdown-converter.git ~/.openclaw/skills/
 ```
 
 安装时使用 `--safe` 参数
-
-## 配置 Notion LifeOS ⭐
-
-**Notion LifeOS** 是基于 PARA 方法的个人知识管理系统，通过 OpenClaw 可以用自然语言管理你的 Notion 数据库。
-
-### 功能特性
-
-- ✅ 创建和查询任务（Task）
-- ✅ 创建和查询笔记（Notes）
-- ✅ 管理项目（Projects）
-- ✅ 管理领域（Areas）
-- ✅ 管理资源（Resources）
-- ✅ Make Time 日记（每日亮点/感恩/放下）
-
-### 快速安装
-
-```bash
-# 方式一：ClawHub（推荐）
-clawhub install notion-lifeos
-
-# 方式二：手动安装
-git clone https://github.com/jiahao-shao1/openclaw-skill-notion-lifeos.git ~/.openclaw/workspace/skills/notion-lifeos
-```
-
-### 配置步骤
-
-1. **获取 Notion API Key**
-   - 访问 [Notion Integrations](https://www.notion.so/my-integrations)
-   - 创建新的 Integration，获取 API Key
-   - 保存到 `~/.config/notion/api_key`
-
-   ```bash
-   mkdir -p ~/.config/notion
-   echo "your_notion_api_key_here" > ~/.config/notion/api_key
-   chmod 600 ~/.config/notion/api_key
-   ```
-
-2. **配置数据库 ID**
-   - 编辑 `~/.openclaw/workspace/skills/notion-lifeos/SKILL.md`
-   - 替换占位符为你自己的数据库 ID（详见 [配置文档](https://github.com/jiahao-shao1/openclaw-skill-notion-lifeos#setup)）
-
-3. **使用 Notion LifeOS 模板**
-   - Notion LifeOS 模板即将开源，敬请期待！
-   - 模板包含完整的 PARA 系统数据库结构
-
-### 使用示例
-
-配置完成后，你可以用自然语言操作 Notion：
-
-```
-"添加任务：Review PR #123，截止日期明天"
-"创建笔记：今天的会议记录"
-"查询未完成的任务"
-"显示最近的笔记"
-"添加今天的 Make Time 日记"
-```
-
-详细文档：[openclaw-skill-notion-lifeos](https://github.com/jiahao-shao1/openclaw-skill-notion-lifeos)
 
 ## 核心特性
 
