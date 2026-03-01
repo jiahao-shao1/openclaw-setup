@@ -130,11 +130,8 @@ clawhub install skill-name
 | **proactive-agent** | 主动式 Agent 架构 | `clawhub install proactive-agent` | [halthelobster/proactive-agent](https://github.com/halthelobster/proactive-agent) |
 | **nano-banana-pro** | AI 图片生成（基于 Gemini） | `clawhub install nano-banana-pro` | [openclaw/nano-banana-pro](https://github.com/openclaw/nano-banana-pro) |
 | **markdown-converter** | PDF/文档转 Markdown | `clawhub install markdown-converter` | [openclaw/markdown-converter](https://github.com/openclaw/markdown-converter) |
-| **excalidraw** | 手绘风格流程图 | `clawhub install excalidraw` | [openclaw/excalidraw](https://github.com/openclaw/excalidraw) |
-| **de-ai-ify** | 去除 AI 文本痕迹 | `clawhub install de-ai-ify` | [openclaw/de-ai-ify](https://github.com/openclaw/de-ai-ify) |
-| **humanizer-zh** | 中文人性化处理 | `clawhub install humanizer-zh` | [openclaw/humanizer-zh](https://github.com/openclaw/humanizer-zh) |
-| **quick-reminders** | 快速提醒 | `clawhub install quick-reminders` | [openclaw/quick-reminders](https://github.com/openclaw/quick-reminders) |
-| **github** | GitHub 操作（`gh` CLI，支持 issue/pr/run/api） | `clawhub install steipete/github` | [steipete/clawdhub](https://github.com/openclaw/skills/tree/main/skills/steipete/clawdhub) |
+| **tavily-search** | 深度网络搜索（学术论文、技术内容） | `clawhub install tavily-search` | [openclaw/tavily-search](https://github.com/openclaw/tavily-search) |
+| **munger-observer** | 芒格观察（每日思维模型复盘） | `clawhub install munger-observer` | [openclaw/munger-observer](https://github.com/openclaw/munger-observer) |
 | **notion-lifeos** ⭐ | Memory System for Human — Notion LifeOS PARA 系统管理 | `clawhub install notion-lifeos` | [jiahao-shao1/openclaw-skill-notion-lifeos](https://github.com/jiahao-shao1/openclaw-skill-notion-lifeos) |
 
 ### 手动安装命令示例
