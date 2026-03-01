@@ -356,6 +356,24 @@ openclaw security audit --fix
 
 这些内容通过 `.gitignore` 排除，仅在本地 `USER.md` 和 `TOOLS.md` 中配置。
 
+## TODO
+
+### 记忆系统增强
+- [ ] **对话导入工具** — 支持从 Gemini、ChatGPT、Claude 导出对话记录，存入 OpenClaw 记忆系统
+  - 自动解析对话格式（JSON/Markdown）
+  - 按主题分类存储到 `memory/topics/` 或 `memory/reading-group/`
+  - 保留时间戳和上下文元数据
+  - 支持批量导入和增量更新
+
+### 工作流自动化
+- [ ] **GitHub Issues 自动处理** — 监控 repo issues，自动生成修复方案并提交 PR
+- [ ] **论文阅读助手** — 自动下载 arXiv 论文，生成摘要和笔记
+- [ ] **会议记录自动化** — 语音转文字 + 自动整理到 Notion
+
+### Skills 开发
+- [ ] **Moltbook 深度集成** — 自动发帖、回复、互动
+- [ ] **学术社交网络** — 自动追踪合作者的最新论文和动态
+
 ## 参考链接
 
 - [OpenClaw 文档](https://docs.openclaw.ai)
