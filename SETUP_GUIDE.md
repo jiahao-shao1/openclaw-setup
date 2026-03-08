@@ -1,145 +1,147 @@
-# 详细配置指南
+**English** | [中文](SETUP_GUIDE.zh.md)
 
-本文档详细介绍如何配置和定制你的 OpenClaw 环境。
+# Detailed Setup Guide
 
-## 目录
+This document covers how to configure and customize your OpenClaw environment.
 
-1. [本地部署](#本地部署)
-2. [安装 Skills](#安装-skills)
-3. [配置 Agent Reach](#配置-agent-reach)
-4. [模型配置](#模型配置)
-5. [网络代理](#网络代理)
-6. [定时任务](#定时任务)
-7. [Token 成本优化](#token-成本优化)
-8. [安全加固](#安全加固)
+## Table of Contents
+
+1. [Local Deployment](#local-deployment)
+2. [Installing Skills](#installing-skills)
+3. [Configuring Agent Reach](#configuring-agent-reach)
+4. [Model Configuration](#model-configuration)
+5. [Network Proxy](#network-proxy)
+6. [Scheduled Tasks](#scheduled-tasks)
+7. [Token Cost Optimization](#token-cost-optimization)
+8. [Security Hardening](#security-hardening)
 
 ---
 
-## 本地部署
+## Local Deployment
 
-### 环境要求
+### Requirements
 - macOS / Linux / Windows (WSL2)
 - Node.js >= 22.0.0
-- 2GB+ 内存
-- 10GB+ 磁盘空间
+- 2GB+ RAM
+- 10GB+ disk space
 
-### 安装步骤
+### Installation
 
 ```bash
-# 方式一：一键脚本（推荐）
+# Option 1: One-line install script (recommended)
 curl -fsSL https://openclaw.ai/install.sh | bash
 
-# 方式二：npm 全局安装
+# Option 2: npm global install
 npm install -g openclaw@latest
 
-# 运行配置向导
+# Run the setup wizard
 openclaw onboard --install-daemon
 ```
 
-配置向导会引导你完成：
-- 选择 AI 模型提供商（Claude、OpenAI、Gemini 等）
-- 配置 API Key
-- 选择消息渠道（Telegram、飞书等）
+The setup wizard will walk you through:
+- Choosing an AI model provider (Claude, OpenAI, Gemini, etc.)
+- Configuring your API key
+- Selecting a messaging channel (Telegram, Lark, etc.)
 
-### 验证安装
+### Verifying the Installation
 
 ```bash
-# 检查 Gateway 状态
+# Check Gateway status
 openclaw gateway status
 
-# 启动 Gateway
+# Start the Gateway
 openclaw gateway start
 
-# 打开控制面板
+# Open the dashboard
 openclaw dashboard
 
-# 健康检查
+# Run a health check
 openclaw doctor
 ```
 
-### 故障排除
+### Troubleshooting
 
 ```bash
-# Gateway 无法启动
+# If the Gateway fails to start
 openclaw gateway logs
 openclaw gateway restart
 
-# 检查端口占用
+# Check for port conflicts
 lsof -i :18789
 ```
 
 ---
 
-## 安装 Skills
+## Installing Skills
 
-Skills 可以通过两种方式安装：
+Skills can be installed in two ways:
 
-### 方式一：ClawHub（推荐，但近期有限制）
+### Option 1: ClawHub (recommended, but currently rate-limited)
 
 ```bash
-# 列出可用 Skills
+# List available Skills
 clawhub list
 
-# 安装 Skill
+# Install a Skill
 clawhub install skill-name
 
-# 更新 Skill
+# Update a Skill
 clawhub update skill-name
 ```
 
-> ⚠️ **注意**：近期 ClawHub 有 rate limit 限制，如果遇到安装失败，请使用手动安装方式。
+> ⚠️ **Note**: ClawHub is currently subject to rate limits. If installation fails, use the manual installation method instead.
 
-### 方式二：手动安装（git clone）
+### Option 2: Manual Installation (git clone)
 
-如果 ClawHub 安装失败，可以通过 git clone 手动安装到 `~/.openclaw/skills/` 目录（Shared Skills，可被多个 OpenClaw 实例共享）：
+If ClawHub installation fails, you can manually clone Skills into `~/.openclaw/skills/` (Shared Skills, accessible by multiple OpenClaw instances):
 
-### 核心 Skills
+### Core Skills
 
 ```bash
-# 创建 shared skills 目录（推荐，可被多个实例共享）
+# Create the shared skills directory (recommended, shareable across instances)
 mkdir -p ~/.openclaw/skills
 
-# Agent Reach - 让 AI 能够访问互联网（Twitter/X、Reddit、YouTube、GitHub、Bilibili、小红书、抖音等）
+# Agent Reach - Gives your AI access to the internet (Twitter/X, Reddit, YouTube, GitHub, Bilibili, Xiaohongshu, Douyin, etc.)
 git clone https://github.com/Panniantong/agent-reach.git \
   ~/.openclaw/skills/agent-reach
 
-# 持续改进系统
+# Self-improving agent system
 git clone https://github.com/pskoett/self-improving-agent.git \
   ~/.openclaw/skills/self-improving-agent
 
-# 主动式 Agent 架构
+# Proactive agent architecture
 git clone https://github.com/halthelobster/proactive-agent.git \
   ~/.openclaw/skills/proactive-agent
 ```
 
-### 其他推荐 Skills
+### Other Recommended Skills
 
 ```bash
-# AI 图片生成（基于 Gemini）
+# AI image generation (powered by Gemini)
 git clone https://github.com/openclaw/nano-banana-pro.git \
   ~/.openclaw/skills/nano-banana-pro
 
-# PDF/文档转 Markdown
+# PDF/document to Markdown converter
 git clone https://github.com/openclaw/markdown-converter.git \
   ~/.openclaw/skills/markdown-converter
 
-# 手绘风格流程图
+# Hand-drawn style diagrams
 git clone https://github.com/openclaw/excalidraw.git \
   ~/.openclaw/skills/excalidraw
 
-# 去除 AI 文本痕迹
+# Remove AI-generated text patterns
 git clone https://github.com/openclaw/de-ai-ify.git \
   ~/.openclaw/skills/de-ai-ify
 
-# 中文人性化处理
+# Chinese text humanizer
 git clone https://github.com/openclaw/humanizer-zh.git \
   ~/.openclaw/skills/humanizer-zh
 
-# 快速提醒
+# Quick reminders
 git clone https://github.com/openclaw/quick-reminders.git \
   ~/.openclaw/skills/quick-reminders
 
-# GitHub 操作（gh CLI）
+# GitHub operations (gh CLI)
 git clone https://github.com/openclaw/skills.git \
   ~/.openclaw/skills/steipete-github
 cd ~/.openclaw/skills/steipete-github
@@ -149,33 +151,33 @@ git sparse-checkout set skills/steipete/clawdhub
 
 ---
 
-## 配置 Agent Reach
+## Configuring Agent Reach
 
-Agent Reach 是让 OpenClaw 拥有"眼睛"的关键技能，可以直接访问互联网上的各大平台。
+Agent Reach is the key skill that gives OpenClaw "eyes" — direct access to major platforms across the internet.
 
-### 快速配置
+### Quick Setup
 
-复制这句话给你的 AI Agent：
-
-```
-帮我安装 Agent Reach：https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/install.md
-```
-
-Agent 会自己完成剩下的所有事情。
-
-### 安全模式
-
-🛡️ 担心安全？使用安全模式——不会自动装系统包，只告诉你需要什么：
+Copy this message and send it to your AI Agent:
 
 ```
-帮我安装 Agent Reach（安全模式）：https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/install.md
+Help me install Agent Reach: https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/install.md
 ```
 
-安装时使用 `--safe` 参数
+The Agent will handle everything from there.
 
-### 手动安装（备选）
+### Safe Mode
 
-如果上述方式无法使用，可以手动安装：
+🛡️ Concerned about security? Use safe mode — it won't automatically install system packages, and will only tell you what's needed:
+
+```
+Help me install Agent Reach (safe mode): https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/install.md
+```
+
+Use the `--safe` flag during installation.
+
+### Manual Installation (fallback)
+
+If the above methods don't work, you can install manually:
 
 ```bash
 pip install https://github.com/Panniantong/agent-reach/archive/main.zip
@@ -183,29 +185,29 @@ agent-reach install --env=auto
 agent-reach doctor
 ```
 
-### 配置代理
+### Configuring a Proxy
 
 ```bash
 agent-reach configure proxy http://127.0.0.1:7890
 ```
 
-### Cookie 导入
+### Importing Cookies
 
-所有需要登录的平台（Twitter、小红书等）：
+For any platform that requires login (Twitter, Xiaohongshu, etc.):
 
-1. 在浏览器登录对应平台
-2. 安装 [Cookie-Editor](https://chromewebstore.google.com/detail/cookie-editor/hlkenndednhfkekhgcdicdfddnkalmdm) Chrome 插件
-3. 点击插件 → Export → **Header String**
-4. 把导出的字符串发给 Agent
+1. Log into the platform in your browser
+2. Install the [Cookie-Editor](https://chromewebstore.google.com/detail/cookie-editor/hlkenndednhfkekhgcdicdfddnkalmdm) Chrome extension
+3. Click the extension → Export → **Header String**
+4. Send the exported string to your Agent
 
-或使用命令行自动提取：
+Or extract cookies automatically via the command line:
 ```bash
 agent-reach configure --from-browser chrome
 ```
 
-### 各平台使用示例
+### Platform Usage Examples
 
-安装完成后，直接调用上游工具：
+Once installed, call the upstream tools directly:
 
 ```bash
 # Twitter/X
@@ -221,28 +223,28 @@ yt-dlp --dump-json "https://www.bilibili.com/video/BVxxx"
 curl -s "https://www.reddit.com/r/python/hot.json?limit=10" \
   -H "User-Agent: agent-reach/1.0"
 
-# 小红书
+# Xiaohongshu
 mcporter call 'xiaohongshu.search_feeds(keyword: "query")'
 
-# 抖音
+# Douyin
 mcporter call 'douyin.parse_douyin_video_info(share_link: "https://v.douyin.com/xxx/")'
 
 # GitHub
 gh search repos "query" --sort stars --limit 10
 
-# 任意网页
+# Any webpage
 curl -s "https://r.jina.ai/URL" -H "Accept: text/markdown"
 ```
 
 ---
 
-## 模型配置
+## Model Configuration
 
-### 编辑 Gateway 配置
+### Editing the Gateway Config
 
-配置文件位置：`~/.openclaw/openclaw.json`
+Config file location: `~/.openclaw/openclaw.json`
 
-### 推荐配置
+### Recommended Configuration
 
 ```json
 {
@@ -270,94 +272,94 @@ curl -s "https://r.jina.ai/URL" -H "Accept: text/markdown"
 }
 ```
 
-### 模型选择建议
+### Model Selection Guide
 
-| 场景 | 推荐模型 | 理由 |
-|------|---------|------|
-| 复杂编程任务 | Claude Opus 4.6 | Agentic 能力最强 |
-| 一般对话 | GPT-5.2 | 速度快，额度多 |
-| 成本敏感 | Gemini Flash | 价格便宜 |
-| 中文任务 | Kimi K2.5 | 中文理解好 |
+| Use Case | Recommended Model | Reason |
+|----------|------------------|--------|
+| Complex coding tasks | Claude Opus 4.6 | Best agentic capabilities |
+| General conversation | GPT-5.2 | Fast, generous quota |
+| Cost-sensitive | Gemini Flash | Very affordable |
+| Chinese-language tasks | Kimi K2.5 | Strong Chinese comprehension |
 
 ---
 
-## 网络代理
+## Network Proxy
 
-### 中国大陆用户必备
+### Essential for Users in Mainland China
 
-在你的 `~/.zshrc` 或 `~/.bashrc` 中添加：
+Add the following to your `~/.zshrc` or `~/.bashrc`:
 
 ```bash
-# 通用代理（适用于大部分工具）
+# General proxy (works with most tools)
 export ALL_PROXY=http://127.0.0.1:7890
 export https_proxy=http://127.0.0.1:7890
 export http_proxy=http://127.0.0.1:7890
 export all_proxy=socks5://127.0.0.1:7890
 
-# 根据你的代理软件调整端口
-# Clash 默认: 7890
-# Surge 默认: 6152
+# Adjust the port to match your proxy software
+# Clash default: 7890
+# Surge default: 6152
 ```
 
-### 特殊工具注意
+### Tool-Specific Notes
 
-| 工具 | 代理变量 | 说明 |
-|------|---------|------|
-| Node.js/Python | `ALL_PROXY` | 通用 |
-| Go 工具 | `HTTP_PROXY` + `HTTPS_PROXY` | Go 不认 `ALL_PROXY`！ |
-| yt-dlp | `ALL_PROXY` | 支持 |
-| curl/wget | `https_proxy` | 标准 |
+| Tool | Proxy Variable | Notes |
+|------|---------------|-------|
+| Node.js/Python | `ALL_PROXY` | Universal |
+| Go tools | `HTTP_PROXY` + `HTTPS_PROXY` | Go does not recognize `ALL_PROXY`! |
+| yt-dlp | `ALL_PROXY` | Supported |
+| curl/wget | `https_proxy` | Standard |
 
-### 测试代理
+### Testing the Proxy
 
 ```bash
-# 测试是否生效
+# Verify it's working
 curl -I https://www.google.com
 ```
 
 ---
 
-## 定时任务
+## Scheduled Tasks
 
-### 使用 Cron
+### Using Cron
 
 ```bash
-# 列出所有任务
+# List all tasks
 openclaw cron list
 
-# 添加每日任务
+# Add a daily task
 openclaw cron add --name "morning-brief" \
   --schedule "0 8 * * *" \
   --command "morning-briefing"
 ```
 
-### 推荐任务配置
+### Recommended Task Configuration
 
-| 任务 | Cron 表达式 | 说明 |
-|------|------------|------|
-| nightly-build | `0 3 * * *` | 凌晨 3 点系统维护 |
-| morning-brief | `0 8 * * *` | 早 8 点简报 |
-| paper-digest | `0 9 * * *` | 早 9 点论文推送 |
-| munger-observer | `0 20 * * *` | 晚 8 点芒格观察 |
+| Task | Cron Expression | Description |
+|------|----------------|-------------|
+| nightly-build | `0 3 * * *` | System maintenance at 3 AM |
+| morning-brief | `0 8 * * *` | Morning briefing at 8 AM |
+| paper-digest | `0 9 * * *` | Paper digest at 9 AM |
+| munger-observer | `0 20 * * *` | Munger observer at 8 PM |
 
 ---
 
-## Token 成本优化
+## Token Cost Optimization
 
-⚠️ **警告**：OpenClaw 的 Token 消耗可能远超预期！有用户报告一晚"待机"花费 18.75 美金。
+⚠️ **Warning**: OpenClaw's token consumption can far exceed expectations! Users have reported spending $18.75 in a single overnight "idle" session.
 
-### 成本构成
+### Cost Breakdown
 
-| 来源 | 占比 | 说明 |
-|------|------|------|
-| 上下文累积 | 40-50% | 会话历史无限增长 |
-| 工具输出存储 | 20-30% | 大型 JSON/日志持久化 |
-| 系统提示词 | 10-15% | 复杂提示词重复传输 |
-| 心跳任务 | 5-10% | 后台进程配置不当 |
+| Source | Share | Description |
+|--------|-------|-------------|
+| Context accumulation | 40-50% | Unbounded session history growth |
+| Tool output storage | 20-30% | Large JSON/log persistence |
+| System prompts | 10-15% | Complex prompts sent repeatedly |
+| Heartbeat tasks | 5-10% | Misconfigured background processes |
 
-### 优化策略
+### Optimization Strategies
 
-#### 1. 会话重置（节省 40-60%）
+#### 1. Session Reset (saves 40-60%)
 ```json
 {
   "agent": {
@@ -367,39 +369,39 @@ openclaw cron add --name "morning-brief" \
 }
 ```
 
-#### 2. 智能模型路由（节省 50-80%）
-- 日常任务：Haiku 或 Gemini Flash
-- 复杂推理：Sonnet/Opus
+#### 2. Smart Model Routing (saves 50-80%)
+- Routine tasks: Haiku or Gemini Flash
+- Complex reasoning: Sonnet/Opus
 
-#### 3. 上下文窗口限制（节省 20-40%）
-将默认 400K 缩减到 50-100K tokens。
+#### 3. Context Window Limits (saves 20-40%)
+Reduce the default 400K to 50-100K tokens.
 
-### 综合效果
+### Combined Results
 
-实测通过组合优化：
-- **优化前**: 150 美金/月
-- **优化后**: 35 美金/月
-- **年节省**: 1,380 美金
+Real-world results from combined optimizations:
+- **Before**: $150/month
+- **After**: $35/month
+- **Annual savings**: $1,380
 
 ---
 
-## 安全加固
+## Security Hardening
 
-⚠️ **安全警告**：生产环境部署前务必执行安全加固。
+⚠️ **Security Warning**: Always harden your setup before deploying to production.
 
-### 快速安全检查
+### Quick Security Check
 
 ```bash
-# 运行安全审计
+# Run a deep security audit
 openclaw security audit --deep
 
-# 自动修复
+# Auto-fix issues
 openclaw security audit --fix
 ```
 
-### 关键安全措施
+### Key Security Measures
 
-#### 1. 启用认证
+#### 1. Enable Authentication
 ```json
 {
   "gateway": {
@@ -408,7 +410,7 @@ openclaw security audit --fix
 }
 ```
 
-#### 2. 配置 DM 策略
+#### 2. Configure DM Policy
 ```json
 {
   "channels": {
@@ -419,13 +421,13 @@ openclaw security audit --fix
 }
 ```
 
-策略选项：
-- `pairing`（默认）: 未知发送者收到限时配对码
-- `allowlist`: 完全阻止未知发送者
-- `open`: 允许任何人（不推荐）
-- `disabled`: 忽略所有入站 DM
+Policy options:
+- `pairing` (default): Unknown senders receive a time-limited pairing code
+- `allowlist`: Block unknown senders entirely
+- `open`: Allow anyone (not recommended)
+- `disabled`: Ignore all inbound DMs
 
-#### 3. 文件系统隔离
+#### 3. Filesystem Isolation
 ```json
 {
   "security": {
@@ -436,22 +438,22 @@ openclaw security audit --fix
 }
 ```
 
-#### 4. API 支出限制
-在供应商侧（OpenAI、Anthropic 等）设置硬性支出限制。
+#### 4. API Spending Limits
+Set hard spending limits on the provider side (OpenAI, Anthropic, etc.).
 
-### 已知安全风险
+### Known Security Risks
 
-- **CVE-2026-25253**: WebSocket 劫持漏洞（已在 v2026.1.29 修复）
-- **暴露网关**: 923 个实例以零认证模式暴露在公网
-- **恶意扩展**: 假冒 "ClawdBot Agent" VS Code 扩展
+- **CVE-2026-25253**: WebSocket hijacking vulnerability (fixed in v2026.1.29)
+- **Exposed gateways**: 923 instances found publicly exposed with zero authentication
+- **Malicious extensions**: Fake "ClawdBot Agent" VS Code extension
 
-**建议**：始终保持 OpenClaw 更新到最新版本。
+**Recommendation**: Always keep OpenClaw updated to the latest version.
 
 ---
 
-## 更多资源
+## Additional Resources
 
-- [OpenClaw 文档](https://docs.openclaw.ai)
+- [OpenClaw Documentation](https://docs.openclaw.ai)
 - [OpenClaw GitHub](https://github.com/openclaw/openclaw)
 - [ClawHub](https://clawhub.com)
-- [OpenClaw 安全最佳实践](https://docs.openclaw.ai/security)
+- [OpenClaw Security Best Practices](https://docs.openclaw.ai/security)

@@ -1,8 +1,10 @@
-# TOOLS.md - 工具配置
+**English** | [中文](TOOLS.zh.md.example)
 
-**⚠️ 本文件包含 API Keys 等敏感信息，请勿上传 GitHub**
+# TOOLS.md - Tool Configuration
 
-复制此文件到 `~/.openclaw/workspace/TOOLS.md` 并填写你的配置。
+**Warning: This file contains sensitive information such as API Keys. Do not upload to GitHub.**
+
+Copy this file to `~/.openclaw/workspace/TOOLS.md` and fill in your configuration.
 
 ---
 
@@ -18,38 +20,38 @@ export GEMINI_API_KEY="your-gemini-api-key"
 export OPENAI_API_KEY="your-openai-api-key"
 ```
 
-### 其他服务
+### Other Services
 ```bash
-# 根据需要添加
+# Add as needed
 export ANTHROPIC_API_KEY="your-anthropic-key"
 export BRAVE_API_KEY="your-brave-key"
 ```
 
-## 代理设置
+## Proxy Settings
 
-如果你在中国大陆：
+If you are in mainland China:
 
 ```bash
-# 添加到 ~/.zshrc
+# Add to ~/.zshrc
 export ALL_PROXY=http://127.0.0.1:7890
 export https_proxy=http://127.0.0.1:7890
 export http_proxy=http://127.0.0.1:7890
 ```
 
-## 设备信息
+## Device Information
 
-### SSH 主机
+### SSH Hosts
 - **home-server** → 192.168.1.100, user: admin
 
-### 摄像头
-- **living-room** → 客厅，180° 广角
-- **front-door** → 前门，运动检测
+### Cameras
+- **living-room** → Living room, 180° wide-angle
+- **front-door** → Front door, motion detection
 
-### TTS 语音
-- 偏好声音："Nova"（温暖，略带英式口音）
-- 默认音箱：客厅 HomePod
+### TTS Voice
+- Preferred voice: "Nova" (warm, slight British accent)
+- Default speaker: Living room HomePod
 
-## 工具特定配置
+## Tool-Specific Configuration
 
 ### summarize
 ```json
@@ -65,4 +67,4 @@ export http_proxy=http://127.0.0.1:7890
 
 ---
 
-*根据你的实际情况填写后，保存到 `~/.openclaw/workspace/TOOLS.md`*
+*Fill in your details and save to `~/.openclaw/workspace/TOOLS.md`*

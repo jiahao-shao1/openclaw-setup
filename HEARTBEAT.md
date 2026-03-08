@@ -1,54 +1,56 @@
-# HEARTBEAT.md - 定时检查任务
+**English** | [中文](HEARTBEAT.zh.md)
 
-_定义你的 Agent 的例行工作_
+# HEARTBEAT.md - Scheduled Check Tasks
 
-## 每次心跳检查
+_Define your Agent's routine tasks_
 
-- [ ] 检查 `memory/` 目录下今天的日记文件是否存在，不存在则创建
-- [ ] 如果有待安装的 Skills，尝试安装一个
-- [ ] Git 同步：在 workspace 执行 `git add -A && git commit -m "auto: heartbeat sync" && git push`（无变更则跳过）
+## Every Heartbeat
 
-## 每日检查（轮换）
+- [ ] Check if today's journal file exists under `memory/`; create one if not
+- [ ] If there are Skills pending installation, try installing one
+- [ ] Git sync: run `git add -A && git commit -m "auto: heartbeat sync" && git push` in the workspace (skip if no changes)
 
-- [ ] **天气** - 查看本地今天和明天的天气
-- [ ] **日历/提醒** - 检查是否有即将到期的任务
-- [ ] **邮件** - 检查是否有紧急未读邮件
+## Daily Checks (Rotating)
 
-## 记忆维护（每 3-5 次心跳）
+- [ ] **Weather** - Check today's and tomorrow's local weather
+- [ ] **Calendar / Reminders** - Check for upcoming due tasks
+- [ ] **Email** - Check for urgent unread emails
 
-- [ ] 读取最近几天的 `memory/YYYY-MM-DD.md`
-- [ ] 把重要信息提炼到 `MEMORY.md`
-- [ ] 清理 `MEMORY.md` 中过时的内容
+## Memory Maintenance (Every 3-5 Heartbeats)
 
-**原则：** 日志是原始笔记，`MEMORY.md` 是精华
+- [ ] Read recent `memory/YYYY-MM-DD.md` journal files
+- [ ] Distill important information into `MEMORY.md`
+- [ ] Clean up outdated content in `MEMORY.md`
 
-## 记忆归档（每 3-5 次心跳）
+**Principle:** Journals are raw notes; `MEMORY.md` is the distilled essence.
 
-将每日日志内容按主题自动整理：
+## Memory Archiving (Every 3-5 Heartbeats)
 
-| 内容类型 | 目标位置 | 说明 |
-|---------|---------|------|
-| 论文阅读笔记 | `reading-group/papers/` | 可分享 |
-| AI 行业动态 | `reading-group/news/` | 可分享 |
-| 研究兴趣/方向 | `reading-group/topics/` | 可分享 |
-| 研究项目详情 | `memory/projects/` | 私密 |
-| 个人生活记录 | `memory/personal/` | 私密 |
-| 技术配置 | `memory/topics/` | 私密 |
+Automatically organize daily journal entries by topic:
 
-## 主动改进（有空时）
+| Content Type | Destination | Visibility |
+|-------------|-------------|------------|
+| Paper reading notes | `reading-group/papers/` | Shareable |
+| AI industry news | `reading-group/news/` | Shareable |
+| Research interests / directions | `reading-group/topics/` | Shareable |
+| Research project details | `memory/projects/` | Private |
+| Personal life records | `memory/personal/` | Private |
+| Technical configurations | `memory/topics/` | Private |
 
-- [ ] 找一个小摩擦点改进（整理文件、写文档、优化工作流）
-- [ ] 只做可逆的改动，不主动发邮件/删东西
-- [ ] 记录做了什么到当天的 memory 日志
+## Proactive Improvements (When Free)
 
-## 待安装 Skills 队列
+- [ ] Find a small friction point to improve (organize files, write docs, optimize workflows)
+- [ ] Only make reversible changes; do not send emails or delete things on your own
+- [ ] Log what was done in today's memory journal
 
-在此列出想安装的 Skills，每次心跳尝试安装一个：
+## Skills Installation Queue
+
+List the Skills you want to install here; each heartbeat will attempt to install one:
 
 - [ ] skill-name-1
 - [ ] skill-name-2
 
-## 状态追踪
+## Status Tracking
 
 **`memory/heartbeat-state.json`:**
 ```json
@@ -65,4 +67,4 @@ _定义你的 Agent 的例行工作_
 
 ---
 
-*根据你的需求自定义此文件*
+*Customize this file to suit your needs*

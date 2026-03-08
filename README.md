@@ -1,81 +1,83 @@
-# OpenClaw 个性化配置
+**English** | [中文](README.zh.md)
 
-> **用 OpenClaw 替代所有电子劳动，自动化所有工作流**
+# OpenClaw Personal Configuration
 
-## 核心理念
+> **Replace all digital labor with OpenClaw — automate every workflow**
 
-OpenClaw 不只是一个 AI 助手，而是一个**自动化操作系统**：
+## Core Philosophy
 
-- 🤖 **替代重复劳动** — 让 AI 处理所有机械性的电子工作
-- 🔄 **工作流自动化** — 从信息收集、处理到输出，全流程自动化
-- 🧠 **记忆系统** — 持久化上下文，让 AI 真正"记住"你的偏好和历史
-- 🛠️ **工具编排** — 通过 Skills 连接所有你需要的工具和服务
+OpenClaw is not just an AI assistant — it's an **automation operating system**:
 
-**这套配置的目标**：让你从琐碎的电子劳动中解放出来，专注于真正需要人类创造力的工作。
+- 🤖 **Eliminate repetitive work** — Let AI handle all mechanical digital tasks
+- 🔄 **Workflow automation** — End-to-end automation from data collection to processing to output
+- 🧠 **Memory system** — Persistent context that lets AI truly "remember" your preferences and history
+- 🛠️ **Tool orchestration** — Connect all the tools and services you need through Skills
 
-## 简介
+**The goal of this configuration**: Free yourself from tedious digital labor and focus on work that truly requires human creativity.
 
-这是我在使用的 OpenClaw 配置集合，整理成模板方便大家 fork 和定制。
+## Overview
 
-## 快速开始
+This is my personal OpenClaw configuration collection, organized as a template for easy forking and customization.
 
-### 1. 安装 OpenClaw
+## Quick Start
+
+### 1. Install OpenClaw
 
 ```bash
-# 方式一：一键脚本（推荐）
+# Option 1: One-line install script (recommended)
 curl -fsSL https://openclaw.ai/install.sh | bash
 
-# 方式二：npm 全局安装
+# Option 2: npm global install
 npm install -g openclaw@latest
 ```
 
-### 2. 运行配置向导
+### 2. Run the Setup Wizard
 
 ```bash
 openclaw onboard --install-daemon
 ```
 
-配置向导会自动：
-- 创建 workspace 目录和配置文件
-- 引导你选择 AI 模型提供商（Claude、OpenAI、Gemini 等）
-- 配置 API Key
-- 选择消息渠道（Telegram、飞书等）
-- 生成 AGENTS.md、SOUL.md、USER.md 等文件
+The setup wizard will automatically:
+- Create the workspace directory and configuration files
+- Guide you through selecting an AI model provider (Claude, OpenAI, Gemini, etc.)
+- Configure your API key
+- Choose a messaging channel (Telegram, Lark/Feishu, etc.)
+- Generate AGENTS.md, SOUL.md, USER.md, and other files
 
-### 3. Fork 本仓库（可选）
+### 3. Fork This Repository (Optional)
 
-如果你想使用我的配置作为模板：
+If you want to use my configuration as a starting point:
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/openclaw-setup.git
 cd openclaw-setup
 
-# 复制你需要的配置文件到 workspace
+# Copy the config files you need into your workspace
 cp AGENTS.md SOUL.md HEARTBEAT.md ~/.openclaw/workspace/
 ```
 
-### 4. 配置 Telegram
+### 4. Configure Telegram
 
-#### 1. 创建 Telegram Bot
+#### 1. Create a Telegram Bot
 
-1. 在 Telegram 中找到 [@BotFather](https://t.me/BotFather)
-2. 发送 `/newbot` 创建新 bot
-3. 按提示设置 bot 名称和 username
-4. 获取 Bot Token（格式：`123456789:ABCdefGHIjklMNOpqrsTUVwxyz`）
+1. Find [@BotFather](https://t.me/BotFather) on Telegram
+2. Send `/newbot` to create a new bot
+3. Follow the prompts to set the bot name and username
+4. Get the Bot Token (format: `123456789:ABCdefGHIjklMNOpqrsTUVwxyz`)
 
-#### 2. 配置 OpenClaw
+#### 2. Configure OpenClaw
 
-编辑 `~/.openclaw/openclaw.json`：
+Edit `~/.openclaw/openclaw.json`:
 
 ```json
 {
   "channels": {
     "telegram": {
       "token": "YOUR_BOT_TOKEN",
-      "allowFrom": ["+86138xxxxxxxx"],  // 你的手机号（可选）
+      "allowFrom": ["+86138xxxxxxxx"],  // Your phone number (optional)
       "groups": {
         "*": {
-          "requireMention": true  // 群组中需要 @bot 才会响应
+          "requireMention": true  // Require @bot mention in groups to respond
         }
       }
     }
@@ -83,39 +85,39 @@ cp AGENTS.md SOUL.md HEARTBEAT.md ~/.openclaw/workspace/
 }
 ```
 
-#### 3. 获取群组 ID
+#### 3. Get Group IDs
 
-创建群组后，需要获取群组 ID 用于 cron 任务推送：
+After creating a group, you'll need the group ID for cron job notifications:
 
-**方法 1：通过 OpenClaw 日志查看（最简单）**
+**Method 1: Check OpenClaw logs (easiest)**
 ```bash
-# 在群组中 @bot 发送任意消息
-# OpenClaw 会在日志中显示 chat_id
-# 群组 ID 格式：telegram:-1001234567890（负数）
+# Send any message in the group while @mentioning the bot
+# OpenClaw will display the chat_id in its logs
+# Group ID format: telegram:-1001234567890 (negative number)
 ```
 
-**方法 2：使用 Telegram Bot API**
+**Method 2: Use the Telegram Bot API**
 ```bash
-# 1. 先在群组中发送一条消息（任意内容）
-# 2. 然后调用 API
+# 1. Send a message in the group first (any content)
+# 2. Then call the API
 curl "https://api.telegram.org/bot<YOUR_BOT_TOKEN>/getUpdates"
 
-# 3. 在返回的 JSON 中找到 result[0].message.chat.id
-# 群组 ID 是负数，格式：-1001234567890
+# 3. Find result[0].message.chat.id in the returned JSON
+# Group IDs are negative numbers, format: -1001234567890
 ```
 
-**方法 3：通过 Telegram 桌面版（最快）**
+**Method 3: Via Telegram Desktop (fastest)**
 ```bash
-# 1. 在群组中发送一条消息
-# 2. 右键点击消息 → "Copy Message Link"
-# 3. 链接格式：https://t.me/c/194xxxx987/11/13
-# 4. 提取中间的数字（194xxxx987），加上 -100 前缀
-# 5. 最终群组 ID：-100194xxxx987
+# 1. Send a message in the group
+# 2. Right-click the message → "Copy Message Link"
+# 3. Link format: https://t.me/c/194xxxx987/11/13
+# 4. Extract the middle number (194xxxx987), prepend -100
+# 5. Final group ID: -100194xxxx987
 ```
 
-#### 4. 群组权限配置
+#### 4. Group Permission Configuration
 
-**推荐配置**：为不同类型的消息创建不同群组
+**Recommended**: Create separate groups for different types of messages
 
 ```json
 {
@@ -123,12 +125,12 @@ curl "https://api.telegram.org/bot<YOUR_BOT_TOKEN>/getUpdates"
     "telegram": {
       "groups": {
         "*": {
-          "requireMention": true,  // 默认需要 @mention
-          "allowFrom": ["+86138xxxxxxxx"]  // 只允许特定用户
+          "requireMention": true,  // Require @mention by default
+          "allowFrom": ["+86138xxxxxxxx"]  // Only allow specific users
         },
-        "-1001234567890": {  // 特定群组 ID
-          "requireMention": false,  // 该群组不需要 @mention
-          "allowFrom": ["*"]  // 允许所有人
+        "-1001234567890": {  // Specific group ID
+          "requireMention": false,  // No @mention required in this group
+          "allowFrom": ["*"]  // Allow everyone
         }
       }
     }
@@ -136,242 +138,242 @@ curl "https://api.telegram.org/bot<YOUR_BOT_TOKEN>/getUpdates"
 }
 ```
 
-**群组分工示例**（参考我的配置）：
+**Example group setup** (based on my configuration):
 
-- **agent config** — Agent 配置相关（nightly-build、系统维护）
-- **reading group** — 科研、论文、行业动态
-- **self-improvement** — 自我提升、芒格观察
+- **agent config** — Agent configuration (nightly-build, system maintenance)
+- **reading group** — Research, papers, industry news
+- **self-improvement** — Personal growth, Munger observations
 
-#### 5. 安全建议
+#### 5. Security Recommendations
 
-- ✅ 设置 `allowFrom` 限制允许的用户
-- ✅ 群组中启用 `requireMention: true`
-- ✅ 定期检查 bot 的群组列表
-- ✅ 不要在公开群组中使用敏感功能
+- ✅ Set `allowFrom` to restrict allowed users
+- ✅ Enable `requireMention: true` in groups
+- ✅ Regularly review the bot's group memberships
+- ✅ Avoid using sensitive features in public groups
 
-### 验证安装
+### Verify Installation
 
 ```bash
-# 检查 Gateway 状态
+# Check Gateway status
 openclaw gateway status
 
-# 启动 Gateway
+# Start Gateway
 openclaw gateway start
 
-# 健康检查
+# Health check
 openclaw doctor
 ```
 
-## 安装 Skills
+## Installing Skills
 
-Skills 可以通过两种方式安装：
+Skills can be installed in two ways:
 
-### 方式一：ClawHub（推荐，但近期有限制）
+### Option 1: ClawHub (Recommended, but currently rate-limited)
 
 ```bash
-# 列出可用 Skills
+# List available Skills
 clawhub list
 
-# 安装 Skill
+# Install a Skill
 clawhub install skill-name
 ```
 
-> ⚠️ **注意**：近期 ClawHub 有 rate limit 限制，如果遇到安装失败，请使用手动安装方式。
+> ⚠️ **Note**: ClawHub is currently experiencing rate limits. If installation fails, use the manual installation method instead.
 
-### 方式二：手动安装（git clone）
+### Option 2: Manual Installation (git clone)
 
-如果 ClawHub 安装失败，可以通过 git clone 手动安装到 `~/.openclaw/skills/` 目录（Shared Skills，可被多个 OpenClaw 实例共享）：
+If ClawHub installation fails, you can manually install Skills via git clone into `~/.openclaw/skills/` (Shared Skills, accessible by multiple OpenClaw instances):
 
-| Skill | 功能 | ClawHub 命令 | 手动安装链接 |
-|-------|------|-------------|-------------|
-| **agent-reach** ⭐ | 访问互联网（Twitter/X、YouTube、Bilibili、小红书、抖音等） | `clawhub install agent-reach` | [Panniantong/agent-reach](https://github.com/Panniantong/agent-reach) |
-| **self-improving-agent** | 持续改进系统，记录学习/错误/修正 | `clawhub install self-improving-agent` | [pskoett/self-improving-agent](https://github.com/pskoett/self-improving-agent) |
-| **proactive-agent** | 主动式 Agent 架构 | `clawhub install proactive-agent` | [halthelobster/proactive-agent](https://github.com/halthelobster/proactive-agent) |
-| **nano-banana-pro** | AI 图片生成（基于 Gemini） | `clawhub install nano-banana-pro` | [openclaw/nano-banana-pro](https://github.com/openclaw/nano-banana-pro) |
-| **markdown-converter** | PDF/文档转 Markdown | `clawhub install markdown-converter` | [openclaw/markdown-converter](https://github.com/openclaw/markdown-converter) |
-| **tavily-search** | 深度网络搜索（学术论文、技术内容） | `clawhub install tavily-search` | [openclaw/tavily-search](https://github.com/openclaw/tavily-search) |
-| **munger-observer** | 芒格观察（每日思维模型复盘） | `clawhub install munger-observer` | [jiahao-shao1/openclaw-skill-munger-observer](https://github.com/jiahao-shao1/openclaw-skill-munger-observer) |
-| **github** | GitHub 操作（`gh` CLI，支持 issue/pr/run/api） | `clawhub install steipete/github` | [steipete/clawdhub](https://github.com/openclaw/skills/tree/main/skills/steipete/clawdhub) |
-| **notion-lifeos** ⭐ | Memory System for Human — Notion LifeOS PARA 系统管理 | `clawhub install notion-lifeos` | [jiahao-shao1/openclaw-skill-notion-lifeos](https://github.com/jiahao-shao1/openclaw-skill-notion-lifeos) |
+| Skill | Description | ClawHub Command | Manual Install |
+|-------|-------------|-----------------|----------------|
+| **agent-reach** ⭐ | Internet access (Twitter/X, YouTube, Bilibili, Xiaohongshu, Douyin, etc.) | `clawhub install agent-reach` | [Panniantong/agent-reach](https://github.com/Panniantong/agent-reach) |
+| **self-improving-agent** | Continuous improvement system — logs learnings, errors, and corrections | `clawhub install self-improving-agent` | [pskoett/self-improving-agent](https://github.com/pskoett/self-improving-agent) |
+| **proactive-agent** | Proactive agent architecture | `clawhub install proactive-agent` | [halthelobster/proactive-agent](https://github.com/halthelobster/proactive-agent) |
+| **nano-banana-pro** | AI image generation (Gemini-based) | `clawhub install nano-banana-pro` | [openclaw/nano-banana-pro](https://github.com/openclaw/nano-banana-pro) |
+| **markdown-converter** | Convert PDFs/documents to Markdown | `clawhub install markdown-converter` | [openclaw/markdown-converter](https://github.com/openclaw/markdown-converter) |
+| **tavily-search** | Deep web search (academic papers, technical content) | `clawhub install tavily-search` | [openclaw/tavily-search](https://github.com/openclaw/tavily-search) |
+| **munger-observer** | Munger Observer (daily mental model reviews) | `clawhub install munger-observer` | [jiahao-shao1/openclaw-skill-munger-observer](https://github.com/jiahao-shao1/openclaw-skill-munger-observer) |
+| **github** | GitHub operations (`gh` CLI — issues, PRs, runs, API) | `clawhub install steipete/github` | [steipete/clawdhub](https://github.com/openclaw/skills/tree/main/skills/steipete/clawdhub) |
+| **notion-lifeos** ⭐ | Memory System for Human — Notion LifeOS PARA system management | `clawhub install notion-lifeos` | [jiahao-shao1/openclaw-skill-notion-lifeos](https://github.com/jiahao-shao1/openclaw-skill-notion-lifeos) |
 
-### 手动安装命令示例
+### Manual Installation Examples
 
 ```bash
-# 创建 shared skills 目录（推荐，可被多个实例共享）
+# Create shared skills directory (recommended, shareable across instances)
 mkdir -p ~/.openclaw/skills
 
-# 安装核心 Skills（推荐全部安装）
+# Install core Skills (recommended to install all)
 git clone https://github.com/Panniantong/agent-reach.git ~/.openclaw/skills/agent-reach
 git clone https://github.com/pskoett/self-improving-agent.git ~/.openclaw/skills/self-improving-agent
 git clone https://github.com/halthelobster/proactive-agent.git ~/.openclaw/skills/proactive-agent
 
-# 安装其他 Skills（按需选择）
+# Install additional Skills (as needed)
 git clone https://github.com/openclaw/nano-banana-pro.git ~/.openclaw/skills/nano-banana-pro
 git clone https://github.com/openclaw/markdown-converter.git ~/.openclaw/skills/markdown-converter
 ```
 
-## 配置 Agent Reach ⭐
+## Configuring Agent Reach ⭐
 
-**Agent Reach** 是让 OpenClaw 拥有"眼睛"的关键技能，可以直接访问互联网上的各大平台。
+**Agent Reach** is the key skill that gives OpenClaw "eyes" — direct access to major internet platforms.
 
-### 快速配置
+### Quick Setup
 
-复制这句话给你的 AI Agent（Claude Code、OpenClaw、Cursor 等）：
-
-```
-帮我安装 Agent Reach：https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/install.md
-```
-
-就这一步。Agent 会自己完成剩下的所有事情。
-
-### 安全模式
-
-🛡️ 担心安全？使用安全模式——不会自动装系统包，只告诉你需要什么：
+Copy this message to your AI Agent (Claude Code, OpenClaw, Cursor, etc.):
 
 ```
-帮我安装 Agent Reach（安全模式）：https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/install.md
+Help me install Agent Reach: https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/install.md
 ```
 
-安装时使用 `--safe` 参数
+That's it. The agent will handle the rest.
 
-## 核心特性
+### Safe Mode
 
-### 1. 自动化工作流示例
+🛡️ Concerned about security? Use safe mode — it won't automatically install system packages, just tells you what's needed:
 
-这套配置展示了如何用 OpenClaw 替代日常电子劳动：
+```
+Help me install Agent Reach (safe mode): https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/install.md
+```
 
-**信息收集自动化**
-- 📰 每日 AI 行业新闻摘要（自动抓取、总结、推送）
-- 📄 每日论文 Digest（arXiv 新论文自动筛选和解读）
-- 🔔 社交媒体监控（Twitter/X、小红书、Bilibili 等）
+Use the `--safe` flag during installation.
 
-**内容处理自动化**
-- 📝 会议记录自动整理到 Notion
-- 🗂️ 文件自动分类和归档
-- 🔍 信息自动提取和结构化
+## Key Features
 
-**输出生成自动化**
-- 📊 周报/月报自动生成
-- 💬 消息自动回复（基于上下文）
-- 📧 邮件草稿自动生成
+### 1. Workflow Automation Examples
 
-**记忆系统自动化**
-- 🧠 每日日志自动记录
-- 📚 知识库自动更新
-- 🔄 上下文自动维护
+This configuration demonstrates how to use OpenClaw to replace everyday digital labor:
 
-### 2. 模型策略
+**Automated Information Gathering**
+- 📰 Daily AI industry news digest (auto-fetch, summarize, and push)
+- 📄 Daily paper digest (auto-filter and interpret new arXiv papers)
+- 🔔 Social media monitoring (Twitter/X, Xiaohongshu, Bilibili, etc.)
 
-**智能路由，成本优化**
-- **复杂任务**: Claude Opus 4.6（Agentic 最强）
-- **一般任务**: GPT-5.2（额度多）
-- **Fallback 链**: 三层容灾 + 指数退避
+**Automated Content Processing**
+- 📝 Meeting notes auto-organized into Notion
+- 🗂️ Automatic file categorization and archiving
+- 🔍 Automatic information extraction and structuring
 
-### 2. 网络配置
-针对中国大陆优化：
-- ALL_PROXY 统一代理设置
-- Go 工具特殊处理（HTTP_PROXY）
-- Skills 自动使用代理
+**Automated Output Generation**
+- 📊 Auto-generated weekly/monthly reports
+- 💬 Context-aware auto-replies
+- 📧 Auto-generated email drafts
 
-### 3. 安全加固
-- 文件系统隔离（workspaceOnly）
-- 高危工具限制（pairing 策略）
-- 技能安装审查
+**Automated Memory System**
+- 🧠 Auto-recorded daily logs
+- 📚 Auto-updated knowledge base
+- 🔄 Auto-maintained context
 
-### 4. 定时任务
+### 2. Model Strategy
 
-**让 AI 主动工作，而不是被动响应**
+**Smart routing for cost optimization**
+- **Complex tasks**: Claude Opus 4.6 (strongest for agentic work)
+- **General tasks**: GPT-5.2 (generous quota)
+- **Fallback chain**: Three-tier failover with exponential backoff
 
-- nightly-build: 凌晨 3 点系统维护
-- morning-briefing: 早 8 点简报
-- daily-paper-digest: 早 9 点论文推送
-- munger-observer: 晚 8 点芒格观察
+### 2. Network Configuration
+Optimized for mainland China:
+- ALL_PROXY unified proxy settings
+- Special handling for Go tools (HTTP_PROXY)
+- Skills automatically use proxy
 
-**核心思想**：AI 应该像一个真正的助手，主动完成周期性工作，而不是等你来问。
+### 3. Security Hardening
+- Filesystem isolation (workspaceOnly)
+- Restricted high-risk tools (pairing policy)
+- Skill installation review
 
-## 自动化哲学
+### 4. Scheduled Tasks
+
+**Let AI work proactively, not just reactively**
+
+- nightly-build: System maintenance at 3 AM
+- morning-briefing: Daily briefing at 8 AM
+- daily-paper-digest: Paper digest at 9 AM
+- munger-observer: Munger observations at 8 PM
+
+**Core principle**: AI should act like a real assistant — proactively completing recurring tasks instead of waiting to be asked.
+
+## Automation Philosophy
 
 ```
 ~/.openclaw/
 ├── workspace/
-│   ├── AGENTS.md              # ← 本仓库提供
-│   ├── SOUL.md                # ← 本仓库提供
-│   ├── HEARTBEAT.md           # ← 本仓库提供
-│   ├── USER.md                # ← 你自己创建（私密）
-│   ├── TOOLS.md               # ← 你自己创建（私密）
-│   ├── MEMORY.md              # ← 自动维护
+│   ├── AGENTS.md              # ← Provided by this repo
+│   ├── SOUL.md                # ← Provided by this repo
+│   ├── HEARTBEAT.md           # ← Provided by this repo
+│   ├── USER.md                # ← Created by you (private)
+│   ├── TOOLS.md               # ← Created by you (private)
+│   ├── MEMORY.md              # ← Auto-maintained
 │   └── memory/
-│       ├── YYYY-MM-DD.md      # 每日日志
-│       ├── topics/            # 主题知识库
-│       ├── projects/          # 研究项目
-│       └── reading-group/     # 阅读小组共享
-└── skills/                    # ← Shared Skills（推荐）
-    ├── agent-reach/           # 互联网访问（关键）⭐
+│       ├── YYYY-MM-DD.md      # Daily logs
+│       ├── topics/            # Topic knowledge base
+│       ├── projects/          # Research projects
+│       └── reading-group/     # Reading group shared notes
+└── skills/                    # ← Shared Skills (recommended)
+    ├── agent-reach/           # Internet access (essential) ⭐
     ├── self-improving-agent/
     ├── proactive-agent/
     └── ...
 ```
 
-> **提示**：Skills 可以安装在两个位置：
-> - `~/.openclaw/skills/` - **Shared Skills**（推荐），可被多个 OpenClaw 实例共享
-> - `~/.openclaw/workspace/skills/` - **Workspace Skills**，仅当前实例可用，适合存放个人化配置
+> **Tip**: Skills can be installed in two locations:
+> - `~/.openclaw/skills/` — **Shared Skills** (recommended), accessible by multiple OpenClaw instances
+> - `~/.openclaw/workspace/skills/` — **Workspace Skills**, only available to the current instance, suitable for personalized configurations
 
-## ⚠️ 重要提示
+## ⚠️ Important Notes
 
-### Token 成本控制
+### Token Cost Management
 
-OpenClaw 的 Token 消耗可能超出预期！优化建议：
+OpenClaw's token consumption can exceed expectations! Optimization tips:
 
-- **会话重置**: 任务完成后重置，防止上下文膨胀（节省 40-60%）
-- **模型路由**: 简单任务用 Haiku/Gemini Flash，复杂任务用 Sonnet/Opus（节省 50-80%）
-- **上下文限制**: 将默认 400K 缩减到 50-100K tokens（节省 20-40%）
+- **Session resets**: Reset after completing tasks to prevent context bloat (saves 40-60%)
+- **Model routing**: Use Haiku/Gemini Flash for simple tasks, Sonnet/Opus for complex ones (saves 50-80%)
+- **Context limits**: Reduce the default 400K to 50-100K tokens (saves 20-40%)
 
-实测通过组合优化可从 **150 美金/月降至 35 美金/月**。
+Real-world testing shows combined optimizations can reduce costs from **$150/month to $35/month**.
 
-### 安全加固
+### Security Hardening
 
-生产环境务必执行：
+Essential for production environments:
 
 ```bash
-# 运行安全审计
+# Run security audit
 openclaw security audit --deep
 
-# 自动修复
+# Auto-fix issues
 openclaw security audit --fix
 ```
 
-关键安全措施：
-- ✅ 启用 Token 认证（`auth: "token"`）
-- ✅ 配置 DM 策略为 `pairing` 或 `allowlist`
-- ✅ 定期运行安全审计
-- ✅ 设置 API 支出限制（供应商侧）
+Key security measures:
+- ✅ Enable token authentication (`auth: "token"`)
+- ✅ Set DM policy to `pairing` or `allowlist`
+- ✅ Run security audits regularly
+- ✅ Set API spending limits (provider-side)
 
-## 隐私保护
+## Privacy
 
-本仓库**绝不含**任何私密信息：
-- ❌ 真实姓名、邮箱
-- ❌ Telegram 群组 ID
+This repository **never contains** any private information:
+- ❌ Real names or email addresses
+- ❌ Telegram group IDs
 - ❌ API Keys
-- ❌ 个人日程与目标
+- ❌ Personal schedules or goals
 
-这些内容通过 `.gitignore` 排除，仅在本地 `USER.md` 和 `TOOLS.md` 中配置。
+These are excluded via `.gitignore` and configured only in local `USER.md` and `TOOLS.md` files.
 
 ## TODO
 
-### 记忆系统增强
-- [ ] **对话导入工具** — 支持从 Gemini、ChatGPT、Claude 导出对话记录，存入 OpenClaw 记忆系统
-  - 自动解析对话格式（JSON/Markdown）
-  - 按主题分类存储到 `memory/topics/` 或 `memory/reading-group/`
-  - 保留时间戳和上下文元数据
-  - 支持批量导入和增量更新
+### Memory System Enhancements
+- [ ] **Conversation import tool** — Import conversation history from Gemini, ChatGPT, and Claude into the OpenClaw memory system
+  - Auto-parse conversation formats (JSON/Markdown)
+  - Categorize and store into `memory/topics/` or `memory/reading-group/`
+  - Preserve timestamps and context metadata
+  - Support batch import and incremental updates
 
-## 参考链接
+## Links
 
-- [OpenClaw 文档](https://docs.openclaw.ai)
+- [OpenClaw Docs](https://docs.openclaw.ai)
 - [OpenClaw GitHub](https://github.com/openclaw/openclaw)
 - [ClawHub](https://clawhub.com)
-- [Agent Skills 规范](https://agentskills.io/specification)
+- [Agent Skills Specification](https://agentskills.io/specification)
 
 ## License
 
-MIT — 自由使用、修改和分发
+MIT — Free to use, modify, and distribute
