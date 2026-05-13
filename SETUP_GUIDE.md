@@ -129,6 +129,9 @@ git clone https://github.com/openclaw/markdown-converter.git \
 git clone https://github.com/openclaw/excalidraw.git \
   ~/.openclaw/skills/excalidraw
 
+# TweetClaw X/Twitter automation plugin
+openclaw plugins install @xquik/tweetclaw
+
 # Remove AI-generated text patterns
 git clone https://github.com/openclaw/de-ai-ify.git \
   ~/.openclaw/skills/de-ai-ify

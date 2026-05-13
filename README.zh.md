@@ -196,6 +196,16 @@ clawhub install skill-name
 | **github** | GitHub 操作（`gh` CLI，支持 issue/pr/run/api） | `clawhub install steipete/github` | [steipete/clawdhub](https://github.com/openclaw/skills/tree/main/skills/steipete/clawdhub) |
 | **notion-lifeos** ⭐ | Memory System for Human — Notion LifeOS PARA 系统管理 | `clawhub install notion-lifeos` | [jiahao-shao1/openclaw-skill-notion-lifeos](https://github.com/jiahao-shao1/openclaw-skill-notion-lifeos) |
 
+### X/Twitter 自动化插件
+
+Agent Reach 适合广泛的网页访问和社交平台调研。如果你的 OpenClaw Agent 还需要结构化的 X/Twitter 工作流，可以安装 [TweetClaw](https://github.com/Xquik-dev/tweetclaw) 作为 OpenClaw 插件：
+
+```bash
+openclaw plugins install @xquik/tweetclaw
+```
+
+TweetClaw 已发布到 [npm](https://www.npmjs.com/package/@xquik/tweetclaw)，并收录在 [ClawHub](https://clawhub.ai/kriptoburak/xquik-tweetclaw)。可用于推文搜索、回复搜索、粉丝导出、用户查询、媒体上传和下载、私信、推文监控、webhooks、抽奖，以及需要审批的发推或回复。请将 TweetClaw 和 Xquik 凭据与 OpenClaw 渠道凭据分开管理。
+
 ### 手动安装命令示例
 
 ```bash

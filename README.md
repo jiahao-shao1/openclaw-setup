@@ -196,6 +196,16 @@ If ClawHub installation fails, you can manually install Skills via git clone int
 | **github** | GitHub operations (`gh` CLI — issues, PRs, runs, API) | `clawhub install steipete/github` | [steipete/clawdhub](https://github.com/openclaw/skills/tree/main/skills/steipete/clawdhub) |
 | **notion-lifeos** ⭐ | Memory System for Human — Notion LifeOS PARA system management | `clawhub install notion-lifeos` | [jiahao-shao1/openclaw-skill-notion-lifeos](https://github.com/jiahao-shao1/openclaw-skill-notion-lifeos) |
 
+### X/Twitter Automation Plugin
+
+Agent Reach is useful for broad web access and social research. If your OpenClaw agent also needs structured X/Twitter workflows, install [TweetClaw](https://github.com/Xquik-dev/tweetclaw) as an OpenClaw plugin:
+
+```bash
+openclaw plugins install @xquik/tweetclaw
+```
+
+TweetClaw is published on [npm](https://www.npmjs.com/package/@xquik/tweetclaw) and listed on [ClawHub](https://clawhub.ai/kriptoburak/xquik-tweetclaw). Use it for tweet search, reply search, follower export, user lookup, media upload and download, direct messages, tweet monitors, webhooks, giveaway draws, and approval-gated posting or replies. Keep TweetClaw and Xquik credentials separate from your OpenClaw channel credentials.
+
 ### Manual Installation Examples
 
 ```bash
